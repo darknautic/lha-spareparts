@@ -1,0 +1,72 @@
+
+******** save all in lower case
+
+Continent : Americano, Europeo, Asiatico
+Automaker : General Motors, Ford, Volkswagen
+Brand : Chevrolet, Buick, GMC, Cadillac
+Category : Auto, SUV, PickUP, VAN,  Deportivo
+Automobile  : Corvette, Camaro, Golf, Gol, Passat, Bora
+Parts, Spares & Accessories
+
+
+--queries
+//proveedor 1
+ db.spares.find({Sparepart : "Bugia"})[1].Provider.Priority1;
+
+// Todas las buigias para corvette 
+ db.spares.find({$and : [  {Sparepart : "Bugia"}, {'Model.Corvette' : {$exists : true} }]  })
+
+// Todas las buigias para corvette modelo 2014
+db.spares.find({$and : [  {Sparepart : "Bugia"}, {'Model.Corvette' : {$in : [2014]} }]  })
+
+
+
+
+
+
+----------------------------- dummy data 
+db.spares.insert({
+  Sparepart : "Bugia",
+  Brand : "NYG",
+  Code : "01582524564564",  
+  Model :  {  Corvette : [2009, 2010, 2011, 2012], 
+              Camaro :[2011, 2012  ] 
+              },
+  Kit : "Afinacion",
+  Price : 49.77,
+  Provider : {Priority1 : "prov_x" , Priority2 : "prov_y"}
+});
+
+db.spares.insert({
+  Sparepart : "Bugia",
+  Brand : "BUCH",
+  Code : "01582553456454",  
+  Model :  {  Corvette : [2012, 2013 , 2014]              
+              },
+  Kit : "Afinacion",
+  Price : 20,
+  Provider : {Priority1 : "prov_z" , Priority2 : "prov_y"}
+});
+
+db.spares.insert({
+  Sparepart : "Bugia",
+  Brand : "motorcraft",
+  Code : "01582557364299",  
+  Model :  {  Corvette : [2014]              
+              },
+  Kit : "Afinacion",
+  Price : 100,
+  Provider : {Priority1 : "prov_z" , Priority2 : "prov_y"}
+});
+
+db.spares.insert({
+  Sparepart : "Bugia",
+  Brand : "motorcraft",
+  Code : "01582557311",  
+  Model :  {  Camaro : [2011],
+              Corvette : [2010, 2011]              
+              },
+  Kit : "Afinacion",
+  Price : 100,
+  Provider : {Priority1 : "prov_z" , Priority2 : "prov_y"}
+});
