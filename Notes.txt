@@ -70,3 +70,57 @@ db.spares.insert({
   Price : 100,
   Provider : {Priority1 : "prov_z" , Priority2 : "prov_y"}
 });
+
+
+
+=
+==
+===
+====
+
+
+
+
+
+db.spares.insert({
+  sparepart : "Bujia",
+  brand : "NGK",
+  partNumber : "NGK-2021-1",
+  system : ["Afinacion"],
+  BriefDescription : "chevrolet aveo estándar edition",
+  barCode : "01582524564564",  
+  model :  {  Aveo : [2007,2008,2009,2010]
+              },    
+  Provider : {Priority1 : "Sagaji" , Priority2 : ""},
+  Existence : 30,
+  stockMin : 20,
+  unitCost : 10.50,
+  salePrice : 16.00  
+});
+
+** Cuando llega una promocion (descuento) a 20 articulos de los
+cuales ya habia en stock 10 , llevar el conteo de el los 20 que se han vendido 
+con promocion , no se si sera venficioso para el negocio 
+
+
+
+como borrar undocumento ,, con esto borraremos promciones !¡
+db.toys.insert({ vowels : [
+                        { letter : "a", count : 1 },
+                        { letter : "e", count : 3 },
+                        { letter : "i", count : 2 },
+                        { letter : "o", count : 5 },
+                        { letter : "u", count : 7 }
+                        ],
+                  ABC : [
+                        { letter : "a", count : 10 },
+                        { letter : "b", count : 2 },
+                        { letter : "c", count : 3 },
+                        { letter : "z", count : 7 }
+                  ]
+                  });
+
+db.toys.update({'_id' : ObjectId("534ccd251a21489c50c8cc79")},{$pull : {'vowels.$.letter' : "u"}})                  
+db.toys.find({'_id' : ObjectId("534ccd251a21489c50c8cc79")})                  
+
+db.presentations.update({'content.assets._id': ObjectId('4fc63def5b20fb722900010e')}, {$pull: {'content.$.assets': {'_id': ObjectId('4fc63def5b20fb722900010e')}}})
