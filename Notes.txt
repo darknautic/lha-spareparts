@@ -8,98 +8,32 @@ Automobile  : Corvette, Camaro, Golf, Gol, Passat, Bora
 Parts, Spares & Accessories
 
 
---queries
+----------------------*********  queries 
+
 //proveedor 1
  db.spares.find({Sparepart : "Bugia"})[1].Provider.Priority1;
 
-// Todas las buigias para corvette 
- db.spares.find({$and : [  {Sparepart : "Bugia"}, {'Model.Corvette' : {$exists : true} }]  })
+// Todos los registros que contengan el string "Bujia" en sparePart para el  Aveo
+  db.spares.find({$and : [ {sparepart :  /Bujia/ }, {'model.Aveo' : {$exists : true} }]  });
+  db.spares.find({$and : [ {sparepart :  /.*Bujia.*/ }, {'model.Aveo' : {$exists : true} }]  });
+
+// Todos los registros que contienen el string "2021" en partNumber
+  db.spares.find({$and : [ {partNumber :  /2021/ }, {}]  });
+
 
 // Todas las buigias para corvette modelo 2014
-db.spares.find({$and : [  {Sparepart : "Bugia"}, {'Model.Corvette' : {$in : [2014]} }]  })
+  db.spares.find({$and : [  {Sparepart : "Bugia"}, {'Model.Corvette' : {$in : [2014]} }]  })
 
 
 
 
 
 
------------------------------ dummy data 
-db.spares.insert({
-  Sparepart : "Bugia",
-  Brand : "NYG",
-  Code : "01582524564564",  
-  Model :  {  Corvette : [2009, 2010, 2011, 2012], 
-              Camaro :[2011, 2012  ] 
-              },
-  Kit : "Afinacion",
-  Price : 49.77,
-  Provider : {Priority1 : "prov_x" , Priority2 : "prov_y"}
-});
-
-db.spares.insert({
-  Sparepart : "Bugia",
-  Brand : "BUCH",
-  Code : "01582553456454",  
-  Model :  {  Corvette : [2012, 2013 , 2014]              
-              },
-  Kit : "Afinacion",
-  Price : 20,
-  Provider : {Priority1 : "prov_z" , Priority2 : "prov_y"}
-});
-
-db.spares.insert({
-  Sparepart : "Bugia",
-  Brand : "motorcraft",
-  Code : "01582557364299",  
-  Model :  {  Corvette : [2014]              
-              },
-  Kit : "Afinacion",
-  Price : 100,
-  Provider : {Priority1 : "prov_z" , Priority2 : "prov_y"}
-});
-
-db.spares.insert({
-  Sparepart : "Bugia",
-  Brand : "motorcraft",
-  Code : "01582557311",  
-  Model :  {  Camaro : [2011],
-              Corvette : [2010, 2011]              
-              },
-  Kit : "Afinacion",
-  Price : 100,
-  Provider : {Priority1 : "prov_z" , Priority2 : "prov_y"}
-});
-
-
-
-=
-==
-===
-====
-
-
-
-
-
-db.spares.insert({
-  sparepart : "Bujia",
-  brand : "NGK",
-  partNumber : "NGK-2021-1",
-  system : ["Afinacion"],
-  BriefDescription : "chevrolet aveo estándar edition",
-  barCode : "01582524564564",  
-  model :  {  Aveo : [2007,2008,2009,2010]
-              },    
-  Provider : {Priority1 : "Sagaji" , Priority2 : ""},
-  Existence : 30,
-  stockMin : 20,
-  unitCost : 10.50,
-  salePrice : 16.00  
-});
 
 ** Cuando llega una promocion (descuento) a 20 articulos de los
 cuales ya habia en stock 10 , llevar el conteo de el los 20 que se han vendido 
 con promocion , no se si sera venficioso para el negocio 
+
 
 
 
@@ -127,7 +61,7 @@ db.presentations.update({'content.assets._id': ObjectId('4fc63def5b20fb722900010
 --------****  removing  ****-------
 -----------------------------------
 
-db.a.insert({ 	a : "a", 	b : "b", 	c : "c" })
+db.a.insert({   a : "a",  b : "b",  c : "c" })
 db.a.update({ "_id" :  ObjectId("534da52852e6e9f2e7353309")},{$unset : {a : ""}});
 
 -----------------------------------
@@ -136,11 +70,11 @@ db.a.update({ "_id" :  ObjectId("534da52852e6e9f2e7353309")},{$unset : {a : ""}}
 db.z.insert({
 name : "theName", 
 worth : [
-			{ p1 : [{existence : 1 },{ price : 1 }]},
-			{ p2 : [{existence : 2 },{ price : 2 }]},
-			{ p3 : [{existence : 3 },{ price : 3 }]}
-		]
-		});
+      { p1 : [{existence : 1 },{ price : 1 }]},
+      { p2 : [{existence : 2 },{ price : 2 }]},
+      { p3 : [{existence : 3 },{ price : 3 }]}
+    ]
+    });
 
 
 
@@ -150,4 +84,23 @@ db.z.update({"_id" : ObjectId("534db9897dac5d149b60b49e")}, {$pull : {"worth" : 
  db.z.find({ "_id" : ObjectId("534dbe587dac5d149b60b49f")},{'worth' : true}).pretty();
 -----------------------------------
 -----------------------------------
+
+
+
+
+stockLog
+
+db.stockLog.insert({
+  eventDate : new Date(),
+  io : "in",
+  sparepart : "Bujia",
+  partNumber : "KB-2840",
+  barCode : "002122121",
+  partNumber : "",
+  howMany : 17,
+  howManyBefore : 1,  // cuantos habia antes de esta llegada
+  purchasePrice : 5.10
+  provider : ""
+
+});
 
