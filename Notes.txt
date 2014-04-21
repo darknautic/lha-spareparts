@@ -92,14 +92,12 @@ stockLog
 
 db.stockLog.insert({
   eventDate : new Date(),
-  io : "in",
-  sparepart : "Bujia",
+  io : "in",  
   partNumber : "KB-2840",
-  barCode : "002122121",
-  partNumber : "",
+  barCode : "4495394803947",  
   howMany : 17,
   howManyBefore : 1,  // cuantos habia antes de esta llegada
-  purchasePrice : 5.10
+  purchasePrice : 5.10,
   provider : ""
 
 });
