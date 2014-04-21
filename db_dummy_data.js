@@ -1,20 +1,20 @@
 db.spares.insert({
-  sparepart : "Bujia",
+  sparePart : "bujia",
   briefDescription : "",
-  brand : "NGK",
-  partNumber : "NGK-2021-1",
-  system : ["Afinacion","Arranque"],  
+  brand : "ngk",
+  partNumber : "ngk-2021-1",
+  system : ["afinacion","arranque"],  
   barCode : "449539480394",  
-  model :  {  Aveo : {
+  model :  {  aveo : {
                       standar : [2007,2008,2009,2010],
                       limited : [2007,2008],
                       sport : [2010]
                      },
-              Camaro : {
+              camaro : {
                       v6 : [2007,2008,2009,2010],
                       v8 : [2014]                    
                      }
-              Ferrari : {
+              ferrari : {
                       class01 : [2010],
                       class02 : [2011],
                       class03 : [2012],
@@ -23,16 +23,16 @@ db.spares.insert({
                      }
     
   },
-  Provider : ["Sagaji" ,"Egarama","Proveedor-3","Proveedor-4"],  
+  providers : ["sagaji" ,"egarama","proveedor-3","proveedor-4"],  
   stockMin : 40,
   existence : 60,  
+  salePrice : 16.00, // it is set by manager or business owner
   specialOfferPrice : 10,   /* calculado por porcentage o pesos descontados esto es manejado desde la 
                             interface y aqui solo se guarda el resultado
                             */
-  salePrice : 16.00, // It is set by manager or business owner
   balance : 340  /**
-                goal : To know how money is in stock : 
-                in(+)(unitPrice*how many bougth)  out,sale(-)(salesPrice)
+                goal : to know how money is in stock : 
+                in(+)(unitprice*how many bougth)  out,sale(-)(salesprice)
                 */
 });
 
@@ -40,18 +40,18 @@ db.spares.insert({
 --------------------------------------------------------------------
 
 db.spares.insert({
-  sparepart : "Bujia",
+  sparePart : "bujia",
   briefDescription : "", 
-  brand : "NGK",
-  partNumber : "NGK-2021-1",
-  system : ["Afinacion"],  
-  barCode : "449539480394",  
-  model :  {  Aveo : {
-                      standar : [2007,2008,2009,2010],                      
+  brand : "ngk",
+  partNumber : "ngk-2021-1",
+  system : ["afinacion"],  
+  barCode : "4495394803947",  
+  model :  {  aveo : {
+                      standar : [2007,2008,2009,2010]
                      }
     
   },
-  Provider : ["Sagaji" ,"egarama"],  
+  providers : ["sagaji" ,"egarama"],  
   stockMin : 40,
   existence : 60,  
   specialOfferPrice : 10,
@@ -60,18 +60,18 @@ db.spares.insert({
 });
 
 db.spares.insert({
-  sparepart : "Bujia Laser",
+  sparePart : "bujia laser",
   briefDescription : "",
-  brand : "NGK",
-  partNumber : "NGK-2021-1-L",
-  system : ["Afinacion"],  
+  brand : "ngk",
+  partNumber : "ngk-2021-1-l",
+  system : ["afinacion"],  
   barCode : "0870935409504",  
-  model :  {  Aveo : {
+  model :  {  aveo : {
                       limited : [2010,2011,2012,2013]                      
                      }
     
   },
-  Provider : ["Sagaji" ,"Rolcar"],
+  providers : ["sagaji" ,"rolcar"],
   stockMin : 20,
   existence : 28,  
   specialOfferPrice : null,
@@ -80,18 +80,19 @@ db.spares.insert({
 });
 
 db.spares.insert({
-  sparepart : "Bujia Platinium",
-  brand : "NGK",
-  partNumber : "NGK-2021-1-P",
-  system : ["Afinacion"],  
+  sparePart : "bujia platinium",
+  briefDescription : "",
+  brand : "ngk",
+  partNumber : "ngk-2021-1-p",
+  system : ["afinacion"],  
   barCode : "01582524564564",  
-  model :  {  Aveo : {                      
+  model :  {  aveo : {                      
                       sport : [2014],
                       limited : [2013]
                      }
     
   },
-  Provider : ["Sagaji" ,"Cordero"],
+  providers : ["sagaji" ,"cordero"],
   stockMin : 7,
   existence : 28,  
   specialOfferPrice : null,
@@ -102,17 +103,18 @@ db.spares.insert({
 
 
 db.spares.insert({
-  sparepart : "Amortiguador Delantero Izq",
-  brand : "Bogue",
-  partNumber : "MP-2840",
-  system : ["Suspension"],  
+  sparePart : "amortiguador delantero izq",
+  briefDescription : "",
+  brand : "bogue",
+  partNumber : "mp-2840",
+  system : ["suspension"],  
   barCode : "84657775992",  
-  model :  {  Gol : {
+  model :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
   },
-  Provider : ["SYD"],
+  providers : ["syd"],
   stockMin : 8,
   existence : 8,  
   specialOfferPrice : null,
@@ -121,17 +123,18 @@ db.spares.insert({
 });
 
 db.spares.insert({
-  sparepart : "Amortiguador Delantero Der",
-  brand : "Bogue",
-  partNumber : "MP-2841",
-  system : ["Suspension"],  
+  sparePart : "amortiguador delantero der",
+  briefDescription : "derecho",
+  brand : "bogue",
+  partNumber : "mp-2841",
+  system : ["suspension"],  
   barCode : "846577755457",  
-  model :  {  Gol : {
+  model :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
   },
-  Provider : ["SYD"],
+  providers : ["syd"],
   stockMin : 8,
   existence : 8,  
   specialOfferPrice : null,
@@ -140,17 +143,18 @@ db.spares.insert({
 });
 
 db.spares.insert({
-  sparepart : "Amortiguador Delantero Izq (Gas)",
-  brand : "Bogue",
-  partNumber : "MP-2840-G",
-  system : ["Suspension"],  
+  sparePart : "amortiguador delantero izq (gas)",
+  briefDescription : "gas izquierdo",
+  brand : "bogue",
+  partNumber : "mp-2840-g",
+  system : ["suspension"],  
   barCode : "85736800223",  
-  model :  {  Gol : {
+  model :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
   },
-  Provider : ["SYD"],
+  providers : ["syd"],
   stockMin : 8,
   existence : 8,  
   specialOfferPrice : null,
@@ -159,17 +163,18 @@ db.spares.insert({
 });
 
 db.spares.insert({
-  sparepart : "Amortiguador Delantero Der (Gas)",
-  brand : "Bogue",
-  partNumber : "MP-2841-G",
-  system : ["Suspension"],  
+  sparePart : "amortiguador delantero der (gas)",
+  briefDescription : "",
+  brand : "bogue",
+  partNumber : "mp-2841-g",
+  system : ["suspension"],  
   barCode : "8573680048485",  
-  model :  {  Gol : {
+  model :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
   },
-  Provider : ["SYD"],
+  providers : ["syd"],
   stockMin : 8,
   existence : 8,  
   specialOfferPrice : null,
@@ -178,17 +183,18 @@ db.spares.insert({
 });
 
 db.spares.insert({
-  sparepart : "Amortiguador Trasero Izq y Der",
-  brand : "Bogue",
-  partNumber : "MP-2841-G",
-  system : ["Suspension"],  
+  sparePart : "amortiguador trasero izq y der",
+  briefDescription : "",
+  brand : "bogue",
+  partNumber : "mp-2841-g",
+  system : ["suspension"],  
   barCode : "1573680048485",  
-  model :  {  Gol : {
+  model :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
   },
-  Provider : ["SYD"],
+  providers : ["syd"],
   stockMin : 8,
   existence : 8,  
   specialOfferPrice : null,
@@ -197,17 +203,18 @@ db.spares.insert({
 });
 
 db.spares.insert({
-  sparepart : "Amortiguador Delantero Izq",
-  brand : "KYB",
-  partNumber : "KB-2840",
-  system : ["Suspension"],  
+  sparePart : "amortiguador delantero izq",
+  briefDescription : "",
+  brand : "kyb",
+  partNumber : "kb-2840",
+  system : ["suspension"],  
   barCode : "9989889898",  
-  model :  {  Gol : {
+  model :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
   },
-  Provider : ["Sagaji"],
+  providers : ["sagaji"],
   stockMin : 8,
   existence : 8,  
   specialOfferPrice : null,
@@ -217,20 +224,36 @@ db.spares.insert({
 
 
 db.spares.insert({
-  sparepart : "Amortiguador Delantero Der",
-  brand : "KYB",
-  partNumber : "KB-2841",
-  system : ["Suspension"],  
+  sparePart : "amortiguador delantero der",
+  briefDescription : "",
+  brand : "kyb",
+  partNumber : "kb-2841",
+  system : ["suspension"],  
   barCode : "99757575757",  
-  model :  {  Gol : {
+  model :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
   },
-  Provider : ["Sagaji"],
+  providers : ["sagaji"],
   stockMin : 8,
   existence : 8,  
   specialOfferPrice : null,
   salePrice : 780.50,
   balance : 0  
+});
+
+
+
+
+
+db.stockLog.insert({
+  eventDate : new Date(),
+  io : "in",  
+  partNumber : "ngk-2021-1",
+  barCode : "4495394803947",  
+  howMany : 17,
+  howManyBefore : 1,  
+  purchasePrice : 5.10,
+  provider : "sagaji"
 });
