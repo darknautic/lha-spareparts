@@ -1,10 +1,7 @@
 package com.lhaModel;
 
-import com.mongodb.DBCursor;
-import com.mongodb.util.JSON;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
@@ -12,9 +9,9 @@ public class Main {
 
 
         Stock stock = new Stock();
-        stock._ip="10.29.210.41";
+        stock._ip="127.0.0.1";
         stock._port=27017;
-        stock._dbName="lha";
+        stock._dbName="LHA";
         stock.connect();
 
 
@@ -31,9 +28,13 @@ public class Main {
         System.out.println(a.length);
         System.out.println(a[2]);
 
+
+
         /**
          *
+         *
          * Lista de todas las refacciones
+         *
          *
          * */
         System.out.println();
@@ -47,14 +48,16 @@ public class Main {
 
         /**
          *
+         *
          * Registrar Nueva Refaccion
+         *
          *
          * */
 
         HashMap<String, String> newRecord = new HashMap<String, String>();
 
         /*nombre de la refaccion*/
-        newRecord.put("sparepart", "Led");
+        newRecord.put("sparePart", "Led");
 
         /*descripcion breve de la refaccion -- este campo tambien es utilizado en las busquedas*/
         newRecord.put("briefDescription", "Led super luminoso");
@@ -114,23 +117,92 @@ public class Main {
         models.put("Ferrari",Ferrari.toString());
 
         newRecord.put("model",models.toString());
-        System.out.println();
         //System.out.println("models : " + models.toString());
 
 
 
-        /*otro campo*/
+        /*definiendo proveedores  de esta refaccion, el order es la prioridad*/
+        List<String> proveedores = new ArrayList<String>();
+        proveedores.add("Sagaji");
+        proveedores.add("Egarama");
+        proveedores.add("Proveedor-3");
+        proveedores.add("Proveedor-4");
+        newRecord.put("providers",proveedores.toString());
 
 
-        System.out.println(newRecord);
-        System.out.println(newRecord.get("sparepart"));
-        System.out.println(newRecord.size());
+        /*stock minimo de la refaccion*/
+        int stockMin = 40;
+        newRecord.put("stockMin",Integer.toString(stockMin));
 
 
+        /*definiendo precio de venta desde que se registra*/
+        double salePrice = 16.00;
+        newRecord.put("salePrice",Double.toString(salePrice));
+
+        /*definiendo precio de venta especial (descuento) */
+        double specialOfferPrice = 13.75;
+        newRecord.put("specialOfferPrice",Double.toString(specialOfferPrice));
 
 
+        /*Creando  nuevo  registro de una refaccion*/
         stock.nuevoRegistro(newRecord);
 
+        System.out.println();
+        System.out.println("Method \"nuevoRegistro\".. ");
+        System.out.println(newRecord);
+
+
+
+        /**
+         *
+         *
+         * Nueva Entrada a Almacen
+         *  (Refaccion previamente registrada)
+         *
+         *
+         * */
+
+        HashMap<String, Object> entrada = new HashMap<String, Object>();
+
+        /*Fecha de acceso*/
+        Calendar eventDate = Calendar.getInstance();
+        TimeZone mexicoTime = TimeZone.getTimeZone("America/Mexico_City");
+        eventDate.setTimeZone(mexicoTime);
+        System.out.println(eventDate.getTime());
+        entrada.put("eventDate", eventDate.getTime());
+
+        /*part Code Number*/
+        entrada.put("partNumber", "ngk-2021-1");
+
+        /*codigo de barra*/
+        entrada.put("barCode", "4495394803947");
+
+        /* Cantidad de refacciones que accesan*/
+        entrada.put("howMany", 10);
+
+        /* Precio Unitario*/
+        entrada.put("purchasePrice", 7.00);
+
+        /*Proveedor*/
+        entrada.put("provider", "sagaji");
+
+
+
+        stock.entradaAlmacen(entrada);
+
+
+
+
+
+
+        /**
+         *
+         *
+         *
+         *  FullText Search
+         *
+         *
+         * */
 
 
 
