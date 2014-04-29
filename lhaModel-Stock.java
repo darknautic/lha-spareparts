@@ -20,14 +20,15 @@ public class Stock {
     public int _port;
     public String _dbName;
     private DB db;
-
+    private MongoClient mongoClient;
 
     public Stock(){};
 
 
     public void connect(){
         try {
-            MongoClient mongoClient = new MongoClient(_ip,_port);
+            //MongoClient mongoClient = new MongoClient(_ip,_port);
+            mongoClient = new MongoClient(_ip,_port);
             db = mongoClient.getDB(_dbName);
 
         }catch (UnknownHostException e){
@@ -36,6 +37,9 @@ public class Stock {
         }
     }
 
+    public void close(){
+        mongoClient.close();
+    }
 
     public Set<String> collectionList(){
 
@@ -77,7 +81,10 @@ public class Stock {
 
     }
 
-    //---
+    /**
+     *
+     * list of all spares
+     */
 
     public List all(){
         DBCollection spares = db.getCollection("spares");
@@ -86,6 +93,11 @@ public class Stock {
         return a;
 
     }
+
+
+
+
+
 
     public void nuevoRegistro(HashMap<String,String> newRecord){
 
@@ -148,6 +160,8 @@ public class Stock {
         BasicDBObject newLog = new BasicDBObject("eventDate",entrada.get("eventDate")).
                 append("io","in").
                 append("partNumber",entrada.get("partNumber").toString().toLowerCase()).
+                append("who",entrada.get("who")).
+                append("comment",entrada.get("comment")).
                 append("barCode",entrada.get("barCode")).
                 append("howMany",entrada.get("howMany")). //how many are entering
                 append("howManyBefore",existence). //how many exist before this entrance
@@ -168,6 +182,25 @@ public class Stock {
     }
 
 
+
+    public void storeJSONObject(HashMap<String,Object> sparePart,String collectionName){
+
+        DBCollection spares = db.getCollection(collectionName);
+        BasicDBObject sparePartDBObject = new BasicDBObject();
+
+        for( String key : sparePart.keySet())
+        {
+            sparePartDBObject.append(key,sparePart.get(key));
+        }
+
+
+        spares.insert(sparePartDBObject);
+
+
+
+    }
+
+
     public int getExistence(String barCode){
         int result = 0;
         DBCollection spares = db.getCollection("spares");
@@ -176,7 +209,7 @@ public class Stock {
         DBObject existenceDoc ;
 
         try {
-            if(existence.hasNext()) {  //Not while used - because search by barCode must return only 1 Document
+            if(existence.hasNext()) {  //Not while function  used - because search by barCode must return only 1 Document
                 existenceDoc = existence.next();
                 result =(int) Double.parseDouble(existenceDoc.get("existence").toString());
 
@@ -241,6 +274,67 @@ public class Stock {
 
 
 
+    public void updateJSONObject(String keyName,String keyValue,HashMap<String,Object> modifierDoc,String collectionName){
+
+        DBCollection collection = db.getCollection(collectionName);
+        BasicDBObject query = new BasicDBObject(keyName, keyValue);
+        BasicDBObject modifier = new BasicDBObject();
+
+
+        for(String key : modifierDoc.keySet())
+        {
+         modifier.append(key,modifierDoc.get(key));
+        }
+
+
+        collection.update(query,modifier);
+
+    }
+
+
+
+    public HashMap<String,Object> loadObject(String key,String keyValue, String collectionName){
+
+        HashMap<String,Object> JSONObject = new HashMap<String, Object>();
+        DBCollection collection = db.getCollection(collectionName);
+        BasicDBObject query = new BasicDBObject(key, keyValue);
+        DBCursor cursor = collection.find(query);
+
+
+        try {
+            if(cursor.hasNext()) {
+                //System.out.println("result :::" + cursor.next());
+
+                HashMap<String,Object> JSONObjectAux = new HashMap<String, Object>();
+                JSONObjectAux.put("1",cursor.next());
+                for(String attrKeys : ((HashMap<String,Object>)JSONObjectAux.get("1")).keySet()){
+                    //System.out.println(attrKeys);
+                    JSONObject.put(attrKeys,((HashMap<String,Object>)JSONObjectAux.get("1")).get(attrKeys));
+
+                }
+                //System.out.println(JSONObject);
+
+
+
+            }
+            else
+            {
+                JSONObject.clear();
+            }
+        } finally {
+            cursor.close();
+        }
+
+
+        return JSONObject;
+    }
+
+
+    /**
+     * useful functions for above methods
+     * @param s
+     * @return
+     */
 
 
     public static List<String> stringFormattedToStringList(String s) {
