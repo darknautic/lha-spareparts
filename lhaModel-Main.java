@@ -33,7 +33,7 @@ public class Main {
         /**
          *
          *
-         * Lista de todas las refacciones
+         * Listar todas las Refacciones
          *
          *
          * */
@@ -145,11 +145,9 @@ public class Main {
 
 
         /*Creando  nuevo  registro de una refaccion*/
-        stock.nuevoRegistro(newRecord);
+        //stock.nuevoRegistro(newRecord);
 
-        System.out.println();
-        System.out.println("Method \"nuevoRegistro\".. ");
-        System.out.println(newRecord);
+
 
 
 
@@ -174,6 +172,12 @@ public class Main {
         /*part Code Number*/
         entrada.put("partNumber", "ngk-2021-1");
 
+        /*Quien modifico*/
+        entrada.put("who", "tony stark");
+
+        /* comentario */
+        entrada.put("comment", "pedido urgent bla bla");
+
         /*codigo de barra*/
         entrada.put("barCode", "4495394803947");
 
@@ -195,6 +199,24 @@ public class Main {
 
 
 
+
+        /**
+         *
+         *
+         *
+         *  Actualizar Registro
+         *
+         * Mantener el formato base del JSON para evitar incosistencias
+         * */
+
+        HashMap<String,Object> modifierDoc = new HashMap<String, Object>();
+        String barCode = "";
+        //stock.update(modifierDoc,barCode);
+
+
+
+
+
         /**
          *
          *
@@ -203,6 +225,147 @@ public class Main {
          *
          *
          * */
+
+
+        stock.close();
+
+
+
+
+
+        //*********************************************************************
+        //*********************************************************************
+
+        /**
+         *
+         *
+         *
+         *  SparePart Class
+         *
+         *
+         * */
+
+
+
+        SparePart sparePart = new SparePart();
+
+        /*Setting Name,description and Brand*/
+        sparePart.setSparePartName("Llanta");
+        sparePart.setBriefDescription("Llanta a todo terreno");
+        sparePart.setBrand("Michelline");
+        sparePart.setBarCode("xxxyyy");
+        //System.out.println(sparePart.getSparePartName());
+        //System.out.println(sparePart.getBriefDescription());
+        //System.out.println(sparePart.getBrand());
+
+
+        /*Setting Systems*/
+        sparePart.addSystem("Afinacion");
+        sparePart.addSystem("Balanceo");
+        sparePart.addSystem("Defensa");
+        //System.out.println(sparePart.getSystem());
+        sparePart.removeSystem("Defensa");
+        //System.out.println(sparePart.getSystem());
+
+
+        /*
+         * Setting Compatibility,is used to know what  cars,editions and models
+         * are compatible with this sparePart.
+         *
+         * */
+
+        /* Adding compatible cars for this sparePart*/
+        sparePart.addCarToCompatibility("Gol");
+        sparePart.addCarToCompatibility("Jetta");
+        sparePart.addCarToCompatibility("Jetta");
+        sparePart.addCarToCompatibility("Polo");
+        //System.out.println("compatibilityy => " + sparePart.getCompatibility());
+
+
+        /*Removing a car from compatibility*/
+        sparePart.removeCarFromCompatibility("Jetta");
+        //System.out.println(sparePart.getCompatibility());
+
+
+
+
+        /*Adding compatible Editions to every compatible car */
+        sparePart.addEditionToCar("CL","Gol");
+        sparePart.addEditionToCar("Sport","Gol");
+        sparePart.addEditionToCar("V8","Jetta");
+        sparePart.addEditionToCar("CL","Polo");
+        sparePart.addEditionToCar("Sport","Polo");
+        sparePart.addEditionToCar("Basic","Polo");
+        //System.out.println(sparePart.getCompatibility());
+
+        /*Remove editions from a car*/
+        sparePart.removeEditionFromCar("CL","Gol");
+        sparePart.removeEditionFromCar("V8","Jetta");
+        //System.out.println(sparePart.getCompatibility());
+
+
+        /*Adding compatible Models to editions and to cars*/
+        sparePart.addModelToEdition(2008,"CL","Gol");
+        sparePart.addModelToEdition(2009,"CL","Gol");
+        sparePart.addModelToEdition(2010,"CL","Gol");
+        sparePart.addModelToEdition(2011,"CL","Gol");
+        sparePart.addModelToEdition(2014,"Basic","Polo");
+        //System.out.println(sparePart.getCompatibility());
+
+
+
+        /*You can add car,edition and model at the same time as follow */
+        sparePart.addModelToEdition(2015,"V12","Camaro");
+        sparePart.removeModelFromEdition(2015,"V12","Camaro");
+        sparePart.removeModelFromEdition(2010,"CL","Gol");
+        //System.out.println(sparePart.getCompatibility());
+
+
+        /*Add Provider*/
+        sparePart.addProvider("Sagaji");
+        sparePart.addProvider("FYI");
+        //System.out.println(sparePart.getProviders());
+
+        /*Remove Provider*/
+        sparePart.removeProvider("Sagaji");
+        //System.out.println(sparePart.getProviders());
+
+
+        /**
+         * connect to DB to store SparePart JSON Object
+         *
+         */
+
+        //sparePart.storeSparePart();
+        System.out.println(sparePart.getCompatibility());
+
+
+        /**
+         * get sparePart from database
+         */
+
+        //barCode
+        sparePart.loadSparePart("xxxyyy");
+        System.out.println(sparePart.getCompatibility());
+
+
+
+
+        /**
+         * update sparePart and save it to DB
+         */
+
+
+        sparePart.loadSparePart("01582524564564");
+        System.out.println(sparePart.getBrand());
+        sparePart.setBrand("ACME");
+        System.out.println(sparePart.getBrand());
+        sparePart.storeSparePart();
+        sparePart.loadSparePart("01582524564564");
+        System.out.println(sparePart.getBrand());
+
+
+
 
 
 
