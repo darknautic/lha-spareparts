@@ -1,3 +1,10 @@
+
+***
+Index and Constraint
+add -  db.spares.ensureIndex( { "barCode": 1 }, { unique: true } )
+remove - db.spares.dropIndex( { "barCode": 1 } )
+
+
 ******** save all in lower case
 
 Continent : Americano, Europeo, Asiatico
@@ -92,13 +99,15 @@ stockLog
 
 db.stockLog.insert({
   eventDate : new Date(),
-  io : "in",  
+  who : "",
+  comment : "",
+  io : "in",  // [in,out,registration,modification]
   partNumber : "KB-2840",
   barCode : "4495394803947",  
   howMany : 17,
   howManyBefore : 1,  // cuantos habia antes de esta llegada
   purchasePrice : 5.10,
   provider : ""
-
+  
 });
 
