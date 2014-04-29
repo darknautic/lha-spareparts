@@ -3,34 +3,34 @@ db.spares.insert({
   briefDescription : "",
   brand : "ngk",
   partNumber : "ngk-2021-1",
-  system : ["afinacion","arranque"],  
+  systems : ["afinacion","arranque"],  
   barCode : "449539480394",  
-  model :  {  aveo : {
-                      standar : [2007,2008,2009,2010],
-                      limited : [2007,2008],
-                      sport : [2010]
-                     },
-              camaro : {
-                      v6 : [2007,2008,2009,2010],
-                      v8 : [2014]                    
-                     }
-              ferrari : {
-                      class01 : [2010],
-                      class02 : [2011],
-                      class03 : [2012],
-                      class04 : [2013],
-                      class05 : [2014],
-                     }
-    
+  compatibility :  { 
+      aveo : {
+                  standar : [2007,2008,2009,2010],
+                  limited : [2007,2008],
+                  sport : [2010]
+                  },
+      camaro : {
+                  v6 : [2007,2008,2009,2010],
+                  v8 : [2014]                    
+                 },
+      ferrari : {
+                  class01 : [2010],
+                  class02 : [2011],
+                  class03 : [2012],
+                  class04 : [2013],
+                  class05 : [2014],
+                }
   },
   providers : ["sagaji" ,"egarama","proveedor-3","proveedor-4"],  
   stockMin : 40,
   existence : 60,  
   salePrice : 16.00, // it is set by manager or business owner
-  specialOfferPrice : 10,   /* calculado por porcentage o pesos descontados esto es manejado desde la 
+  specialOfferPrice : 10.00,   /* calculado por porcentage o pesos descontados esto es manejado desde la 
                             interface y aqui solo se guarda el resultado
                             */
-  balance : 340  /**
+  balance : 340.00  /**
                 goal : to know how money is in stock : 
                 in(+)(unitprice*how many bougth)  out,sale(-)(salesprice)
                 */
@@ -44,9 +44,9 @@ db.spares.insert({
   briefDescription : "", 
   brand : "ngk",
   partNumber : "ngk-2021-1",
-  system : ["afinacion"],  
+  systems : ["afinacion"],  
   barCode : "4495394803947",  
-  model :  {  aveo : {
+  compatibility :  {  aveo : {
                       standar : [2007,2008,2009,2010]
                      }
     
@@ -54,9 +54,9 @@ db.spares.insert({
   providers : ["sagaji" ,"egarama"],  
   stockMin : 40,
   existence : 60,  
-  specialOfferPrice : 10,
+  specialOfferPrice : 10.0,
   salePrice : 16.00,
-  balance : 340  
+  balance : 340.0  
 });
 
 db.spares.insert({
@@ -64,9 +64,9 @@ db.spares.insert({
   briefDescription : "",
   brand : "ngk",
   partNumber : "ngk-2021-1-l",
-  system : ["afinacion"],  
+  systems : ["afinacion"],  
   barCode : "0870935409504",  
-  model :  {  aveo : {
+  compatibility :  {  aveo : {
                       limited : [2010,2011,2012,2013]                      
                      }
     
@@ -76,7 +76,7 @@ db.spares.insert({
   existence : 28,  
   specialOfferPrice : null,
   salePrice : 40.00,
-  balance : 40  
+  balance : 40.00  
 });
 
 db.spares.insert({
@@ -84,9 +84,9 @@ db.spares.insert({
   briefDescription : "",
   brand : "ngk",
   partNumber : "ngk-2021-1-p",
-  system : ["afinacion"],  
+  systems : ["afinacion"],  
   barCode : "01582524564564",  
-  model :  {  aveo : {                      
+  compatibility :  {  aveo : {                      
                       sport : [2014],
                       limited : [2013]
                      }
@@ -97,7 +97,7 @@ db.spares.insert({
   existence : 28,  
   specialOfferPrice : null,
   salePrice : 180.00,
-  balance : 21  
+  balance : 21.00  
 }); 
 
 
@@ -107,9 +107,9 @@ db.spares.insert({
   briefDescription : "",
   brand : "bogue",
   partNumber : "mp-2840",
-  system : ["suspension"],  
+  systems : ["suspension"],  
   barCode : "84657775992",  
-  model :  {  gol : {
+  compatibility :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
@@ -127,9 +127,9 @@ db.spares.insert({
   briefDescription : "derecho",
   brand : "bogue",
   partNumber : "mp-2841",
-  system : ["suspension"],  
+  systems : ["suspension"],  
   barCode : "846577755457",  
-  model :  {  gol : {
+  compatibility :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
@@ -147,9 +147,9 @@ db.spares.insert({
   briefDescription : "gas izquierdo",
   brand : "bogue",
   partNumber : "mp-2840-g",
-  system : ["suspension"],  
+  systems : ["suspension"],  
   barCode : "85736800223",  
-  model :  {  gol : {
+  compatibility :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
@@ -167,9 +167,9 @@ db.spares.insert({
   briefDescription : "",
   brand : "bogue",
   partNumber : "mp-2841-g",
-  system : ["suspension"],  
+  systems : ["suspension"],  
   barCode : "8573680048485",  
-  model :  {  gol : {
+  compatibility :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
@@ -187,9 +187,9 @@ db.spares.insert({
   briefDescription : "",
   brand : "bogue",
   partNumber : "mp-2841-g",
-  system : ["suspension"],  
+  systems : ["suspension"],  
   barCode : "1573680048485",  
-  model :  {  gol : {
+  compatibility :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
@@ -207,9 +207,9 @@ db.spares.insert({
   briefDescription : "",
   brand : "kyb",
   partNumber : "kb-2840",
-  system : ["suspension"],  
+  systems : ["suspension"],  
   barCode : "9989889898",  
-  model :  {  gol : {
+  compatibility :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
@@ -228,9 +228,9 @@ db.spares.insert({
   briefDescription : "",
   brand : "kyb",
   partNumber : "kb-2841",
-  system : ["suspension"],  
+  systems : ["suspension"],  
   barCode : "99757575757",  
-  model :  {  gol : {
+  compatibility :  {  gol : {
                       standar : [2009,2010,2011,2012]
                      }
     
@@ -249,6 +249,8 @@ db.spares.insert({
 
 db.stockLog.insert({
   eventDate : new Date(),
+  who : "Tony Stark",
+  comment : "pedido urgente",
   io : "in",  
   partNumber : "ngk-2021-1",
   barCode : "4495394803947",  
