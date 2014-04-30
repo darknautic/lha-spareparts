@@ -29,6 +29,17 @@ public class SparePart {
 
     public SparePart(){
 
+        this.sparePartName = "";
+        this.briefDescription = "";
+        this.brand = "";
+        this.partNumber  = "";
+        this.barCode = "";
+        this.stockMin = 0;
+        this.existence = 0 ;
+        this.salePrice = 0.0;
+        this.specialOfferPrice = 0.0;
+        this.balance = 0.0;
+
         /*Initialization of Systems*/
         List<String> systemsList = new ArrayList<String>();
         this.systems.clear();
@@ -43,10 +54,6 @@ public class SparePart {
         List<String> providersList = new ArrayList<String>();
         this.providers.clear();
         this.providers.put("providers",providersList);
-
-
-
-
 
     }
 
@@ -355,7 +362,8 @@ public class SparePart {
     public void storeSparePart( ){
 
         Stock stock = new Stock();
-        stock._ip="127.0.0.1";
+        //stock._ip="127.0.0.1";
+        stock._ip="10.29.210.41";
         stock._port=27017;
         stock._dbName="LHA";
         stock.connect();
@@ -372,15 +380,23 @@ public class SparePart {
         sparePart.put("compatibility",this.compatibility.get("compatibility"));
         sparePart.put("providers",this.providers.get("providers"));
         sparePart.put("stockMin",this.stockMin);
+        sparePart.put("existence",this.existence);
         sparePart.put("salePrice",this.salePrice);
         sparePart.put("specialOfferPrice",this.specialOfferPrice);
+        sparePart.put("balance",this.balance);
 
 
+        /*we require a new instance , in order to call existenceSparePart method in a cleaned instance */
         SparePart aux = new SparePart();
-        if(aux.existenceSparePart(this.barCode) < 0)
+
+        // less than zero means the document does Not exist
+        if(aux.existenceSparePart(this.barCode) < 0 )
         {
-            /* create a new record */
-            stock.storeJSONObject(sparePart,"spares");
+            /* create a new record if barCode is not null or empty */
+            if(sparePart.get("barCode") != null & ((String)sparePart.get("barCode")).length() > 0 )
+            {
+                stock.storeJSONObject(sparePart,"spares");
+            }
 
         }
         else{
@@ -398,7 +414,8 @@ public class SparePart {
 
 
         Stock stock = new Stock();
-        stock._ip="127.0.0.1";
+        //stock._ip="127.0.0.1";
+        stock._ip="10.29.210.41";
         stock._port=27017;
         stock._dbName="LHA";
         stock.connect();
@@ -406,7 +423,11 @@ public class SparePart {
         HashMap<String,Object> sparePart;
         sparePart = stock.loadObject("barCode",barCode,"spares");
 
-        if(!sparePart.isEmpty()) {
+
+
+
+
+        if( !sparePart.isEmpty() & ((String) sparePart.get("barCode")) != null ) {
 
 
             this.sparePartName = (String) sparePart.get("sparePart");
@@ -422,19 +443,25 @@ public class SparePart {
             aux = Double.parseDouble(sparePart.get("stockMin").toString());
             this.stockMin = aux.intValue();
 
-            //aux = Double.parseDouble(sparePart.get("existence").toString());
-            //this.existence = aux.intValue();
+            aux = Double.parseDouble(sparePart.get("existence").toString());
+            this.existence = aux.intValue();
 
             this.salePrice = (Double) sparePart.get("salePrice");
             this.specialOfferPrice = (Double) sparePart.get("specialOfferPrice");
-            //this.balance =  (Double) sparePart.get("balance");
+            this.balance =  (Double) sparePart.get("balance");
 
-            }
-         else
+        }
+        else
         {
             sparePart.clear();
             List<String> emptyList = new ArrayList<String>();
             HashMap<String,HashMap<String, List<Integer>>> emptyHash = new HashMap<String, HashMap<String, List<Integer>>>();
+
+
+            /*the next lines are used for cleaning SparePart instance,  so ,
+             that's mean if you want to load and a new document from db,
+              it is supposed that you  don't want to work with previous values
+              */
 
             this.sparePartName = "";
             this.briefDescription = "";
@@ -445,8 +472,11 @@ public class SparePart {
             this.compatibility.put("compatibility", emptyHash);
             this.providers.put("providers", emptyList);
             this.stockMin = 0;
+            this.existence = 0;
             this.salePrice = 0.0;
             this.specialOfferPrice = 0.0;
+            this.balance = 0.0;
+
         }
 
 
@@ -468,7 +498,8 @@ public class SparePart {
         int result = 7;
 
         Stock stock = new Stock();
-        stock._ip="127.0.0.1";
+        //stock._ip="127.0.0.1";
+        stock._ip="10.29.210.41";
         stock._port=27017;
         stock._dbName="LHA";
         stock.connect();
