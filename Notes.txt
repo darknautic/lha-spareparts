@@ -1,9 +1,11 @@
-
 ***
 Index and Constraint
 add -  db.spares.ensureIndex( { "barCode": 1 }, { unique: true } )
 remove - db.spares.dropIndex( { "barCode": 1 } )
 
+*** admin task
+mongo <dbname> --eval "db.dropDatabase()"
+db.collection.drop();
 
 ******** save all in lower case
 
