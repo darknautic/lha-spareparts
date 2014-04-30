@@ -362,8 +362,8 @@ public class SparePart {
     public void storeSparePart( ){
 
         Stock stock = new Stock();
-        //stock._ip="127.0.0.1";
-        stock._ip="10.29.210.41";
+        stock._ip="127.0.0.1";
+        //stock._ip="10.29.210.41";
         stock._port=27017;
         stock._dbName="LHA";
         stock.connect();
@@ -414,8 +414,8 @@ public class SparePart {
 
 
         Stock stock = new Stock();
-        //stock._ip="127.0.0.1";
-        stock._ip="10.29.210.41";
+        stock._ip="127.0.0.1";
+        //stock._ip="10.29.210.41";
         stock._port=27017;
         stock._dbName="LHA";
         stock.connect();
@@ -498,8 +498,8 @@ public class SparePart {
         int result = 7;
 
         Stock stock = new Stock();
-        //stock._ip="127.0.0.1";
-        stock._ip="10.29.210.41";
+        stock._ip="127.0.0.1";
+        //stock._ip="10.29.210.41";
         stock._port=27017;
         stock._dbName="LHA";
         stock.connect();
