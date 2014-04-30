@@ -334,19 +334,63 @@ public class Stock {
 
 
     public void sparesFullTextSearch(String textQuery){
-      /**
-       *  FullText Search
-       *  sparePartName , briefDescription, partNumber and barCode are included
-       *
-       * */
+        /**
+         *  FullText Search
+         *  sparePartName , briefDescription, partNumber and barCode are included
+         *
+         * */
 
-        List<String> splitText = new ArrayList<String>();
-        splitText.clear();
+        List<String> splitText = stringToList(textQuery);
+        System.out.println(splitText);
+
+        HashMap<String,Object> JSONObject = new HashMap<String, Object>();
+        DBCollection collection = db.getCollection("spares");
+        BasicDBObject query = new BasicDBObject();
+        DBCursor cursor;
+
+        for(String s : splitText){
+
+            query.put("sparePart",s);
+            //query.put("briefDescription",s);
+            //query.put("partNumber",s);
+            //query.put("barCode",s);
+
+            cursor = collection.find(query);
+        }
 
 
 
 
-     }
+
+        try {
+            if(cursor.hasNext()) {
+
+                HashMap<String,Object> JSONObjectAux = new HashMap<String, Object>();
+                JSONObjectAux.put("1",cursor.next());
+
+                for(String attrKeys : ((HashMap<String,Object>)JSONObjectAux.get("1")).keySet()){
+                    //System.out.println(attrKeys);
+                    JSONObject.put(attrKeys,((HashMap<String,Object>)JSONObjectAux.get("1")).get(attrKeys));
+
+                }
+                //System.out.println("loaded Document =>" + JSONObject);
+
+
+
+            }
+            else
+            {
+                JSONObject.clear();
+            }
+        } finally {
+            cursor.close();
+        }
+
+
+
+
+
+    }
 
 
 
@@ -357,25 +401,36 @@ public class Stock {
 
 
     public List<String> stringToList(String text){
+
+        /**
+         *
+         * Convert a String ( words separated by white spaces) to List<String>
+         *  and remove white spaces
+         * */
+
         List<String> result = new ArrayList<String>();
 
         List<String> aux ;
-        aux = Arrays.asList(textQuery.replace(" ","/").split("/"));
+        aux = Arrays.asList(text.replace(" ","/").split("/"));
 
         System.out.println(aux);
         for(String s : aux){
-            if(s.isEmpty() | s == null | s.length() <= 0 ){
 
+            /*remove empty values*/
+            if(s.isEmpty() | s == null | s.length() <= 0 ){
             }
             else {
-                splitText.add(s);
+                result.add(s);
             }
+
         }
 
-        System.out.println(splitText);
+        System.out.println(result);
 
         return result;
-     }
+    }
+
+
 
     public static List<String> stringFormattedToStringList(String s) {
 
