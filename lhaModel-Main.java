@@ -9,7 +9,8 @@ public class Main {
 
 
         Stock stock = new Stock();
-        stock._ip="127.0.0.1";
+        stock._ip="10.29.210.41";
+        //stock._ip="127.0.0.1";
         stock._port=27017;
         stock._dbName="LHA";
         stock.connect();
@@ -19,14 +20,14 @@ public class Main {
         System.out.println();
         List b = stock.getSpareOptions();
         System.out.println(b.size());
-        System.out.println(b.get(2));
+        //System.out.println(b.get(2));
 
 
         // Array
         System.out.println();
         Object a[] = stock.getSpareOptionsArray().toArray();
         System.out.println(a.length);
-        System.out.println(a[2]);
+        //System.out.println(a[2]);
 
 
 
@@ -222,9 +223,13 @@ public class Main {
          *
          *
          *  FullText Search
-         *
+         *  sparePartName , briefDescription, partNumber and barCode are included
          *
          * */
+
+        stock.sparesFullTextSearch("sajid   01 austria       4FD33fd sasa   ");
+
+
 
 
         stock.close();
@@ -332,20 +337,24 @@ public class Main {
 
 
         /**
-         * connect to DB to store SparePart JSON Object
+         * store/save SparePart JSON document on Database
          *
          */
 
-        //sparePart.storeSparePart();
-        System.out.println(sparePart.getCompatibility());
+        sparePart.storeSparePart();
+        //System.out.println(sparePart.getCompatibility());
 
 
         /**
          * get sparePart from database
          */
 
-        //barCode
+        /*get sparePart by barCode (barCode is the primary Key)*/
         sparePart.loadSparePart("xxxyyy");
+        System.out.println(sparePart.getCompatibility());
+
+        /*if that key does Not exist , it is loaded a empty document,that 's mean all variables are cleaned */
+        sparePart.loadSparePart("otherID");
         System.out.println(sparePart.getCompatibility());
 
 
@@ -355,14 +364,15 @@ public class Main {
          * update sparePart and save it to DB
          */
 
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
 
         sparePart.loadSparePart("01582524564564");
-        System.out.println(sparePart.getBrand());
-        sparePart.setBrand("ACME");
-        System.out.println(sparePart.getBrand());
+        System.out.println("before :" + sparePart.getBrand());
+        sparePart.setBrand("WOW");
+        System.out.println("on memory :" + sparePart.getBrand());
         sparePart.storeSparePart();
         sparePart.loadSparePart("01582524564564");
-        System.out.println(sparePart.getBrand());
+        System.out.println("after :" + sparePart.getBrand());
 
 
 
