@@ -225,16 +225,16 @@ public class Stock {
     }
 
 
-        public void setExistence(int existence,String barCode){
-            DBCollection spares = db.getCollection("spares");
+    public void setExistence(int existence,String barCode){
+        DBCollection spares = db.getCollection("spares");
 
-            BasicDBObject query = new BasicDBObject("barCode", barCode);
-            BasicDBObject newDoc = new BasicDBObject();
-            newDoc.append("$set",new BasicDBObject().append("existence",existence));
+        BasicDBObject query = new BasicDBObject("barCode", barCode);
+        BasicDBObject newDoc = new BasicDBObject();
+        newDoc.append("$set",new BasicDBObject().append("existence",existence));
 
-            spares.update(query,newDoc);
+        spares.update(query,newDoc);
 
-        }
+    }
 
 
     public double getBalance(String barCode){
@@ -283,7 +283,7 @@ public class Stock {
 
         for(String key : modifierDoc.keySet())
         {
-         modifier.append(key,modifierDoc.get(key));
+            modifier.append(key,modifierDoc.get(key));
         }
 
 
@@ -300,6 +300,8 @@ public class Stock {
         BasicDBObject query = new BasicDBObject(key, keyValue);
         DBCursor cursor = collection.find(query);
 
+        JSONObject.clear();
+        //System.out.println("from Stock " + "key :" + key + " " + "keyValue : "+ keyValue );
 
         try {
             if(cursor.hasNext()) {
@@ -307,12 +309,13 @@ public class Stock {
 
                 HashMap<String,Object> JSONObjectAux = new HashMap<String, Object>();
                 JSONObjectAux.put("1",cursor.next());
+
                 for(String attrKeys : ((HashMap<String,Object>)JSONObjectAux.get("1")).keySet()){
                     //System.out.println(attrKeys);
                     JSONObject.put(attrKeys,((HashMap<String,Object>)JSONObjectAux.get("1")).get(attrKeys));
 
                 }
-                //System.out.println(JSONObject);
+                //System.out.println("loaded Document =>" + JSONObject);
 
 
 
@@ -330,12 +333,49 @@ public class Stock {
     }
 
 
+    public void sparesFullTextSearch(String textQuery){
+      /**
+       *  FullText Search
+       *  sparePartName , briefDescription, partNumber and barCode are included
+       *
+       * */
+
+        List<String> splitText = new ArrayList<String>();
+        splitText.clear();
+
+
+
+
+     }
+
+
+
     /**
      * useful functions for above methods
-     * @param s
-     * @return
+     *
      */
 
+
+    public List<String> stringToList(String text){
+        List<String> result = new ArrayList<String>();
+
+        List<String> aux ;
+        aux = Arrays.asList(textQuery.replace(" ","/").split("/"));
+
+        System.out.println(aux);
+        for(String s : aux){
+            if(s.isEmpty() | s == null | s.length() <= 0 ){
+
+            }
+            else {
+                splitText.add(s);
+            }
+        }
+
+        System.out.println(splitText);
+
+        return result;
+     }
 
     public static List<String> stringFormattedToStringList(String s) {
 
@@ -398,18 +438,18 @@ public class Stock {
          *
          *
          * {
-            Aveo={
-                standar=[2005]
-            },
-            Ferrari={
-                v6=[2011, 2012, 2013, 2014],
-                v8=[2015],
-                v12=[2014, 2015]
-            },
-            Golf={
-                limited=[2013],
-                standar=[2008, 2009, 2010]
-            }
+         Aveo={
+         standar=[2005]
+         },
+         Ferrari={
+         v6=[2011, 2012, 2013, 2014],
+         v8=[2015],
+         v12=[2014, 2015]
+         },
+         Golf={
+         limited=[2013],
+         standar=[2008, 2009, 2010]
+         }
          }
          *
          *
@@ -468,7 +508,7 @@ public class Stock {
             //System.out.println("><>>Key:" +s.substring(0,s.indexOf("=")));
             //System.out.println("><>>value:" +s.replace( s.substring(0, s.indexOf("=") + 1), "" ));
             auxHash.put(s.substring(0,s.indexOf("=")),
-                        stringFormattedToIntegerList(s.replace(s.substring(0,s.indexOf("=")+1),"")));
+                    stringFormattedToIntegerList(s.replace(s.substring(0,s.indexOf("=")+1),"")));
 
         }
 
