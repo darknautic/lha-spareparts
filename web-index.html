@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LHA</title>
+
+
+<!-- <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />  -->
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/start/jquery-ui.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+  
+
+
+</head>
+<body>
+
+
+<div class="container col-md-7">
+
+<!-- $$$$$$$$$$$$$$$$$$$$ -->
+
+<div class="nav-holder">
+<ul class="top-nav">
+<li id="languageChoice">
+<span class="territory">EU</span>
+<a href="#">
+<span class="header-language">English</span>
+</a>
+</li>
+<li>
+<a href="http://blog.lowdi.com">
+<span>Blog</span>
+</a>
+</li>
+<li>
+<a class="scrollerLink" data-href="#buy" href="#buy">
+<span>Basket</span>
+</a>
+</li>
+</ul>
+<nav id="nav">
+<ul>
+<li>
+<a data-href="#speaker" onclick="ABTrackEvent('General', 'Menu.speaker');" href="/#speaker">speaker</a>
+</li>
+<li>
+<a data-href="#specs" onclick="ABTrackEvent('General', 'Menu.specs');" href="/#specs">specs</a>
+</li>
+<li>
+<a data-href="#buy" onclick="ABTrackEvent('General', 'Menu.buy');" href="/#buy">Buy</a>
+</li>
+</ul>
+</nav>
+</div>
+
+
+<!-- $$$$$$$$$$$$$$$$$$$$ -->
+
+
+
+	
+	<h2>Nuevo Articulo.</h2>					
+				<h7>Registro</h7><br><br>
+				
+	      <!-- <form id="newSparePart" role="form" action="">  -->
+	      
+	      	<!-- Codigo -->
+          <div class="form-group">          
+            <input id="barCode" type="text" class="form-control" placeholder="Codigo">
+          </div>
+	      	
+        	<!-- Nombre -->
+          <div class="form-group">          
+            <input id="sparePart" type="text" class="form-control" placeholder="Nombre">
+          </div>
+          
+          <!-- Descripcion-->
+          <div class="form-group">            
+            <input id="briefDescription" type="text" class="form-control" placeholder="Descripcion">
+          </div>
+					
+					<!-- Marca -->
+          <div class="form-group">
+            <input id="brand" type="text" class="form-control" placeholder="Marca" list="brands"/>
+            <datalist id="brands">              
+              <option value="NGK"></option>
+              <option value="Bogue"></option>
+              <option value="KYB"></option>                           
+            </datalist>
+          </div>
+					
+					<!-- Numero de Parte -->
+					<div class="form-group">            
+            <input id="partNumber" type="text" class="form-control" placeholder="Numero de Parte">
+          </div>
+					          
+          
+          <!-- Sistemas -->
+          <div class="form-group">
+            <input id="systems" type="text" class="form-control" placeholder="Sistemas" list="systems"/>
+            <datalist id="systems">              
+              <option value="Afinacion"></option>
+              <option value="Suspension"></option>                                         
+            </datalist>
+          </div>
+          
+          <!-- Compatibilidad -->
+          <div class="form-group">
+            <input id="compatibility" type="text" class="form-control" placeholder="Car + Edicion + Modelo"/>            
+          </div>
+          
+          <!-- Proveedores -->
+          <div class="form-group">
+            <input id="providers" type="text" class="form-control" placeholder="Proveedores" list="providersList"/>
+            <datalist id="providersList">              
+              <option value="Sagaji"></option>
+              <option value="Rolecar"></option>
+              <option value="Cordero"></option>
+              <option value="Egarama"></option>
+              <option value="SYD"></option>                                         
+            </datalist>
+          </div>
+          
+          <!-- Stock Minimo -->
+					<div class="form-group">            
+            <input id="stockMin" type="number" min="0" class="form-control" placeholder="Minimo en Almacen">
+          </div>
+          
+          <!-- Precio Venta -->
+					<div class="form-group">            
+            <input id="salePrice" type="number" min="0" class="form-control" placeholder="Precio Venta">
+          </div>
+          
+          <!-- Precio Especial -->
+					<div class="form-group">            
+            <input id="specialOfferPrice" type="number" min="0" class="form-control" placeholder="Precio Especial / Promocion ">
+          </div>
+          
+          
+          
+          <div class="form-group">
+            <button id="registerSP" type="submit" class="btn btn-info">Registrar</button>
+          </div>
+          
+      <!-- </form>  -->  
+      
+      
+				<span id="msg"></span>
+				<br><br><br><br><br>	
+					
+	
+</div>
+
+
+
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>  -->
+<script type="text/javascript" src="scripts/newSparePart.js"></script>
+
+  
+
+</body>
+</html>
