@@ -346,7 +346,7 @@ public class Stock {
         HashMap<String,Object> JSONObject = new HashMap<String, Object>();
         DBCollection collection = db.getCollection("spares");
         BasicDBObject query = new BasicDBObject();
-        DBCursor cursor;
+        DBCursor cursor ;
 
         for(String s : splitText){
 
@@ -357,35 +357,6 @@ public class Stock {
 
             cursor = collection.find(query);
         }
-
-
-
-
-
-        try {
-            if(cursor.hasNext()) {
-
-                HashMap<String,Object> JSONObjectAux = new HashMap<String, Object>();
-                JSONObjectAux.put("1",cursor.next());
-
-                for(String attrKeys : ((HashMap<String,Object>)JSONObjectAux.get("1")).keySet()){
-                    //System.out.println(attrKeys);
-                    JSONObject.put(attrKeys,((HashMap<String,Object>)JSONObjectAux.get("1")).get(attrKeys));
-
-                }
-                //System.out.println("loaded Document =>" + JSONObject);
-
-
-
-            }
-            else
-            {
-                JSONObject.clear();
-            }
-        } finally {
-            cursor.close();
-        }
-
 
 
 
@@ -432,7 +403,8 @@ public class Stock {
 
 
 
-    public static List<String> stringFormattedToStringList(String s) {
+    public List<String> stringFormattedToStringList(String s) {
+    //public static List<String> stringFormattedToStringList(String s) {
 
         List<String> result = new ArrayList<String>();
         List<String> aux;
@@ -454,7 +426,7 @@ public class Stock {
         return result;
     }
 
-    public static List<Integer> stringFormattedToIntegerList(String s) {
+    public  List<Integer> stringFormattedToIntegerList(String s) {
 
         List<Integer> result = new ArrayList<Integer>();
         List<String> aux;
@@ -480,7 +452,7 @@ public class Stock {
 
 
 
-    public static HashMap<String, Object> stringModelToHashModel(String modelString){
+    public  HashMap<String, Object> stringModelToHashModel(String modelString){
 
         HashMap<String, Object> auxHash = new HashMap<String, Object>();
         List<String> aux;
@@ -537,7 +509,7 @@ public class Stock {
 
 
 
-    public static HashMap<String, Object> arrayStringFormattedToHashMap(String str) {
+    public  HashMap<String, Object> arrayStringFormattedToHashMap(String str) {
 
         List<String> aux ;
         HashMap<String, Object> auxHash = new HashMap<String, Object>();
